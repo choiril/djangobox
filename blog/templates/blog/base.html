@@ -1,0 +1,30 @@
+{% load static %}
+<html>
+	<head>
+		<title>DjangoBox</title>	
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+	</head>
+	<body>
+		<div class="page-header">
+		{% if user.is_authenticated %}
+			<a href="{% url 'post_baru' %}" class="top-menu"><span class="fas fa-plus-circle fa-fw fa-lg"></span></a>
+			<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="fas fa-edit"></span></a>
+			<p class="top-menu">Hallo {{ user.username }} <small> (<a href="{% url 'logout' %}">Log out</a>)</small></p>
+		{% else %}
+			<a href="{% url 'login' %}" class="top-menu"><span class="fas fa-lock"></span></a>
+		{% endif %}
+			<h1><a href="/">Blog DjangoBox</a></h1>
+		</div>
+	<div class="content container">
+		<div class="row">
+			<div class="col-md-12">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
+

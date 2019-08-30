@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><span class="fas fa-pencil-alt"></span></a>
+		<a class="btn btn-danger" href="{% url 'post_hapus' pk=post.pk %}"><span class="fas fa-times"></span>
+</a>
+	{% endif %}
+	<div class="post">
+		<h2>{{ post.judul }}</h2>
+		{% if post.tgl_terbit %}
+			<div class="date">
+				{{ post.tgl_terbit }}
+			</div>
+		{% else %}
+			<a class="btn btn-primary" href="{% url 'post_terbit' pk=post.pk %}">Terbitkan</a>
+		{% endif %}
+		<p>{{ post.isi|linebreaksbr }}</p>
+	</div>
+{% endblock %}
